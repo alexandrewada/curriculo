@@ -437,24 +437,174 @@
   }
 
   @media print {
-    body { background: #fff; padding: 0; }
-    .page {
-      box-shadow: none;
-      border: none;
-      padding: 0 0 0 8px;
-      max-width: none;
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
     }
-    .page::before { width: 3px; }
+
+    @page { margin: 0.7cm; size: A4; }
+
+    body {
+      background: #fff !important;
+      padding: 0 !important;
+      line-height: 1.35;
+      font-size: 10.5pt;
+    }
+
+    .page {
+      box-shadow: none !important;
+      border: none !important;
+      padding: 0 0 0 6px !important;
+      max-width: none !important;
+      width: 100% !important;
+    }
+
+    .page::before { width: 2.5px; }
+
     .print-btn { display: none !important; }
-    .job { break-inside: avoid; }
+
+    .header {
+      gap: 14px;
+      padding-bottom: 10px;
+      padding-right: 0 !important;
+      align-items: flex-start;
+    }
+
+    .photo {
+      width: 78px;
+      height: 78px;
+      border-width: 2px;
+      outline-offset: 2px;
+    }
+
+    h1 { font-size: 18pt; letter-spacing: -0.02em; }
+    .headline { font-size: 9pt; margin-top: 2px; }
+    .status { font-size: 8pt; margin-top: 4px; gap: 4px; }
+    .status .dot { width: 5px; height: 5px; box-shadow: 0 0 0 2px rgba(26, 127, 55, 0.18); }
+    .contact { gap: 3px 10px; margin-top: 6px; font-size: 8pt; }
+    .contact svg { width: 10px; height: 10px; }
+    .highlights { gap: 4px; margin-top: 8px; }
+    .highlights span {
+      font-size: 7.5pt;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    h2 {
+      font-size: 8.5pt;
+      margin: 11px 0 6px;
+      gap: 6px;
+      letter-spacing: 0.1em;
+      break-after: avoid;
+      page-break-after: avoid;
+    }
+    h2 .ico { width: 16px; height: 16px; border-radius: 4px; }
+    h2 .ico svg { width: 9px; height: 9px; }
+
+    .summary,
+    .sec-lead,
+    .job li,
+    .sec-list li {
+      max-width: none !important;
+    }
+
+    .summary {
+      font-size: 9pt;
+      line-height: 1.4;
+    }
+    .summary p + p { margin-top: 4px; }
+
+    .job {
+      margin-bottom: 9px;
+      padding-left: 12px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    .job::before {
+      width: 6px;
+      height: 6px;
+      left: -4px;
+      top: 5px;
+    }
+    .job .role { font-size: 10pt; }
+    .job .meta { font-size: 8pt; margin: 1px 0 4px; }
+    .job li {
+      font-size: 8.5pt;
+      line-height: 1.35;
+      margin-bottom: 2.5px;
+      padding-left: 11px;
+    }
+    .job li::before {
+      width: 3.5px;
+      height: 3.5px;
+      top: 0.45em;
+    }
+    .job .stack { gap: 3px; margin-top: 5px; }
+    .job .stack .stack-label { font-size: 7pt; }
+    .job .stack span:not(.stack-label) {
+      font-size: 7.5pt;
+      padding: 1.5px 5px;
+      border-radius: 3px;
+    }
+
+    .sub {
+      font-size: 9.5pt;
+      margin-bottom: 3px;
+      gap: 6px;
+    }
+    .sub a { font-size: 8pt; }
     .sub a::after {
       content: " (" attr(href) ")";
-      font-size: 9.5px;
+      font-size: 7pt;
       color: var(--muted);
       font-weight: 400;
     }
-    a { color: inherit; }
+
+    .sec-lead {
+      font-size: 9pt;
+      line-height: 1.4;
+      margin-bottom: 5px;
+    }
+    .sec-list li {
+      font-size: 8.5pt;
+      line-height: 1.35;
+      margin-bottom: 3px;
+      padding-left: 11px;
+    }
+    .sec-list li::before {
+      width: 3.5px;
+      height: 3.5px;
+      top: 0.45em;
+    }
+
+    .skills-grid {
+      gap: 4px 16px;
+    }
+    .skills-grid > div {
+      gap: 2px;
+      padding-bottom: 5px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    .skills-grid .cat { font-size: 7.5pt; }
+    .skills-grid .vals { font-size: 8pt; line-height: 1.35; }
+
+    .small, .lang-row { font-size: 9pt; line-height: 1.35; }
+    .lang-row { gap: 3px; }
+
+    a { color: inherit; text-decoration: none; }
     .contact a { color: var(--ink-soft); }
+
+    /* Evita título isolado no fim da página */
+    h2 + .summary,
+    h2 + .job,
+    h2 + .sec-lead,
+    h2 + .skills-grid,
+    h2 + .small,
+    h2 + .lang-row {
+      break-before: avoid;
+      page-break-before: avoid;
+    }
   }
 </style>
 </head>
