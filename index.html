@@ -8,9 +8,23 @@
   @page { margin: 1.1cm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', Arial, sans-serif; color: #222; line-height: 1.42; background: #f0f0f0; padding: 24px; }
-  .page { max-width: 820px; margin: 0 auto; background: #fff; padding: 36px 44px; box-shadow: 0 2px 12px rgba(0,0,0,.12); }
+  .page { max-width: 820px; margin: 0 auto; background: #fff; padding: 36px 44px; box-shadow: 0 2px 12px rgba(0,0,0,.12); position: relative; }
+  .print-btn {
+    position: absolute; top: 18px; right: 18px;
+    background: #0a2540; color: #fff; border: 0; border-radius: 6px;
+    font-size: 12px; font-weight: 600; padding: 8px 12px; cursor: pointer;
+  }
+  .print-btn:hover { background: #1a73e8; }
+  .header { display: flex; gap: 18px; align-items: flex-start; }
+  .photo {
+    width: 96px; height: 96px; border-radius: 50%; object-fit: cover; object-position: center top;
+    flex-shrink: 0; border: 2px solid #e8eef7; box-shadow: 0 1px 4px rgba(10,37,64,.12);
+  }
+  .header-text { flex: 1; min-width: 0; padding-right: 90px; }
   h1 { font-size: 26px; color: #0a2540; letter-spacing: .3px; }
   .headline { font-size: 13px; color: #1a73e8; font-weight: 600; margin-top: 3px; }
+  .status { font-size: 11.5px; color: #0a2540; margin-top: 6px; font-weight: 600; }
+  .status span { color: #1a7f37; }
   .contact { font-size: 11.5px; color: #555; margin-top: 6px; }
   .contact a { color: #1a73e8; text-decoration: none; }
   .contact a:hover { text-decoration: underline; }
@@ -31,33 +45,50 @@
   .sub a { color: #1a73e8; font-weight: 600; text-decoration: none; margin-left: 6px; font-size: 11.5px; }
   .sub a:hover { text-decoration: underline; }
   .small { font-size: 11.5px; }
+  @media (max-width: 640px) {
+    .header { flex-direction: column; align-items: center; text-align: center; }
+    .header-text { padding-right: 0; }
+    .contact { line-height: 1.7; }
+    .highlights { justify-content: center; }
+    .print-btn { position: static; margin: 0 0 12px auto; display: block; }
+  }
   @media print {
     body { background: #fff; padding: 0; }
     .page { box-shadow: none; padding: 0; }
+    .print-btn { display: none !important; }
     .sub a::after { content: " (" attr(href) ")"; font-size: 10px; color: #666; font-weight: 400; }
   }
 </style>
 </head>
 <body>
 <div class="page">
+  <button class="print-btn" type="button" onclick="window.print()">Imprimir / PDF</button>
 
-  <h1>Alexandre Riuti Wada</h1>
-  <div class="headline">Senior / Staff Software Engineer &middot; Backend, Arquitetura &amp; AppSec &middot; IA Aplicada</div>
-  <div class="contact">
-    São Paulo, Brasil
-    &nbsp;|&nbsp; <a href="mailto:alexandre.rwada@gmail.com">alexandre.rwada@gmail.com</a>
-    &nbsp;|&nbsp; <a href="tel:+5511940105999">(11) 94010-5999</a>
-    &nbsp;|&nbsp; <a href="https://linkedin.com/in/alexandre-wada" target="_blank" rel="noopener">linkedin.com/in/alexandre-wada</a>
-    &nbsp;|&nbsp; <a href="https://github.com/alexandrewada" target="_blank" rel="noopener">github.com/alexandrewada</a>
-  </div>
-  <div class="highlights">
-    <span>15+ anos</span>
-    <span>Backend &amp; sistemas distribuídos</span>
-    <span>Tech Lead / Principal</span>
-    <span>AppSec &amp; bug bounty</span>
-    <span>Cloud AWS/GCP</span>
-    <span>IA / LLM agents</span>
-    <span>E-commerce · EdTech · Pagamentos</span>
+  <div class="header">
+    <img class="photo" src="foto.jpg" alt="Alexandre Riuti Wada" width="96" height="96">
+    <div class="header-text">
+      <h1>Alexandre Riuti Wada</h1>
+      <div class="headline">Senior / Staff Software Engineer &middot; Backend, Arquitetura &amp; AppSec &middot; IA Aplicada</div>
+      <div class="status"><span>●</span> Aberto a oportunidades &nbsp;·&nbsp; Remoto / híbrido / presencial &nbsp;·&nbsp; CLT, PJ ou consultoria &nbsp;·&nbsp; Disponibilidade imediata ou conforme aviso</div>
+      <div class="contact">
+        São Paulo, Brasil
+        &nbsp;|&nbsp; <a href="mailto:alexandre.rwada@gmail.com">alexandre.rwada@gmail.com</a>
+        &nbsp;|&nbsp; <a href="tel:+5511940105999">(11) 94010-5999</a><br>
+        <a href="https://linkedin.com/in/alexandre-wada" target="_blank" rel="noopener">linkedin.com/in/alexandre-wada</a>
+        &nbsp;|&nbsp; <a href="https://github.com/alexandrewada" target="_blank" rel="noopener">github.com/alexandrewada</a>
+        &nbsp;|&nbsp; <a href="https://alexandrewada.github.io/curriculo/" target="_blank" rel="noopener">alexandrewada.github.io/curriculo</a>
+        &nbsp;|&nbsp; <a href="https://www.99freelas.com.br/user/alexandre-riuti-wada" target="_blank" rel="noopener">99Freelas · Alexandre Riuti Wada</a>
+      </div>
+      <div class="highlights">
+        <span>15+ anos</span>
+        <span>Backend &amp; sistemas distribuídos</span>
+        <span>Tech Lead / Principal</span>
+        <span>AppSec &amp; bug bounty</span>
+        <span>Cloud AWS/GCP</span>
+        <span>IA / LLM agents</span>
+        <span>E-commerce · EdTech · Pagamentos</span>
+      </div>
+    </div>
   </div>
 
   <h2>Resumo Profissional</h2>
@@ -76,7 +107,7 @@
     <div class="role">Full Stack Engineer — Petlove</div>
     <div class="meta">out/2025 – mai/2026 &middot; São Paulo (Remoto) &middot; Squad SEO · marketplace pet de alto tráfego</div>
     <ul>
-      <li>Atuação em aplicações críticas de catálogo e aquisição orgânica, com impacto direto em SEO, conversão e experiência.</li>
+      <li><strong>Escopo:</strong> ~8 meses no squad SEO de um dos maiores marketplaces pet do Brasil, em aplicações de catálogo e aquisição orgânica.</li>
       <li>Performance web e backend: Core Web Vitals (LCP, INP, CLS), tempo de resposta de APIs, cache, SSR com Nuxt e metadata dinâmica.</li>
       <li>SEO técnico: crawlabilidade, indexação, arquitetura de informação e páginas de alto volume.</li>
       <li>IA aplicada ao catálogo: geração/enriquecimento de conteúdo, sugestão de palavras-chave, otimização de imagens e automações com LLMs/MCP.</li>
@@ -90,13 +121,14 @@
     <div class="role">Senior Backend Engineer III / Tech Lead — Atlas Technologies</div>
     <div class="meta">dez/2022 – set/2025 &middot; São Paulo (Remoto) &middot; Progressão Mid III → Senior I → Senior II → Senior III / Tech Lead</div>
     <ul>
+      <li><strong>Métrica de carreira:</strong> 4 promoções em ~2 anos e 10 meses (Mid III → Senior I → Senior II → Senior III / Tech Lead).</li>
       <li>Desenvolvimento e evolução de backends e APIs REST em PHP/Laravel, Go e Python, em arquitetura de microsserviços.</li>
       <li>Participação em decisões arquiteturais, code review, padronização (SOLID/Clean Code) e definição de práticas de engenharia.</li>
       <li>Performance: otimização de consultas SQL, índices, cache (Redis) e serviços ligados a filas (ex.: AWS SQS); busca com ElasticSearch quando aplicável.</li>
       <li>CI/CD, containers Docker e automações de deploy em cenários multi-cloud (AWS e GCP); deploys críticos e mitigação de incidentes.</li>
       <li>Observabilidade (logs, métricas, alertas), RCA e troubleshooting avançado em produção.</li>
       <li>AppSec interno: identificação e reporte de vulnerabilidades em APIs/serviços; hardening e proteção de endpoints junto ao time de segurança.</li>
-      <li>Liderança técnica: mentoria, apoio em Scrum, POCs de inovação e disseminação de conhecimento (tech talks internas).</li>
+      <li><strong>Time / liderança:</strong> mentoria e code review de engenheiros júnior e pleno; tech talks internas; apoio a Scrum e POCs de inovação.</li>
     </ul>
     <div class="stack">Stack: Go · PHP · Laravel · Python · MySQL · Redis · ElasticSearch · Docker · CI/CD · AWS · GCP · Vue/React · SQS</div>
   </div>
@@ -105,13 +137,13 @@
     <div class="role">Tech Lead / Principal Engineer — Inglês 200 Horas</div>
     <div class="meta">jun/2014 – jun/2022 &middot; São Paulo (Presencial) &middot; EdTech · ERP · pagamentos · franquias</div>
     <ul>
-      <li>Principal referência técnica da plataforma por ~8 anos, com ownership do ciclo completo: código, banco, infra, deploy e sustentação.</li>
+      <li><strong>Escopo:</strong> ~8 anos como principal referência técnica da plataforma, com ownership do ciclo completo (código, banco, infra, deploy e sustentação).</li>
       <li>Modernização de legado (PHP 5 / jQuery) para Laravel no backend e Angular 2+ / Vue / React no frontend; migração gradual monolito → serviços.</li>
       <li>Arquitetura de ERP proprietário (alunos, cursos, financeiro, estoque, vendas, franquias e comissões) e call center com dashboards operacionais.</li>
       <li>Checkout próprio integrado a gateways (Vindi, Mundipagg), com fallback, recorrência e foco em confiabilidade do fluxo de receita.</li>
       <li>Plataforma de gamificação / indicação com hierarquia e cálculo de comissões; forte colaboração com produto e negócio.</li>
       <li>Infraestrutura em AWS e Cloudflare (CDN, WAF); pipelines CI/CD; otimização de queries N+1, cache e índices em picos de acesso.</li>
-      <li>Mentoria, code review e padronização de engenharia (Design Patterns, Clean Code) no time.</li>
+      <li><strong>Time / liderança:</strong> mentoria contínua, code review e padronização de engenharia (Design Patterns, Clean Code) com o time de desenvolvimento.</li>
     </ul>
     <div class="stack">Stack: PHP · Laravel · CodeIgniter · Python · Go · MySQL · Vue · Angular · Docker · AWS · Cloudflare · CI/CD · Git</div>
   </div>
@@ -120,8 +152,8 @@
     <div class="role">Full Stack Engineer — Ideas Promoções e Eventos</div>
     <div class="meta">jan/2012 – dez/2013 &middot; São Paulo (Presencial) &middot; Agência · promoções e campanhas</div>
     <ul>
-      <li>Ciclo completo de soluções digitais para clientes de médio e grande porte: requisitos, desenvolvimento, entrega e sustentação.</li>
-      <li>Sistemas de promoções e sorteios com mecânicas auditáveis, cadastros em escala e picos de acesso em campanhas.</li>
+      <li><strong>Escopo:</strong> ciclo completo para clientes de médio e grande porte em campanhas digitais com picos de acesso.</li>
+      <li>Sistemas de promoções e sorteios com mecânicas auditáveis, cadastros em escala e sustentação pós-campanha.</li>
       <li>Modelagem e otimização SQL; automações/ETL em Python e Shell; administração Linux/Apache; landing pages WordPress.</li>
     </ul>
     <div class="stack">Stack: PHP · Laravel · CodeIgniter · Zend · Python · MySQL · MongoDB · AngularJS · Bootstrap · WordPress · Linux</div>
@@ -176,7 +208,7 @@
     <div class="stack">Stack: Node.js 20 · Fastify 5 · Vue 3 · Vite · PostgreSQL · Stripe · OpenAI · Evolution API</div>
   </div>
   <div class="job">
-    <div class="sub">Freelance — 99Freelas <a href="https://www.99freelas.com.br/user/alexandre-riuti-wada" target="_blank" rel="noopener">▶ Ver perfil</a></div>
+    <div class="sub">Freelance — Alexandre Riuti Wada · 99Freelas <a href="https://www.99freelas.com.br/user/alexandre-riuti-wada" target="_blank" rel="noopener">▶ Ver perfil</a></div>
     <ul>
       <li>Perfil ativo desde 2014: <strong>82 projetos concluídos</strong>, nota <strong>4,83</strong> (85 avaliações), ranking ~128 na plataforma.</li>
       <li>Projetos end-to-end: sistemas web, APIs, integrações, WordPress, automações e manutenção — do desenho ao deploy em Linux.</li>
