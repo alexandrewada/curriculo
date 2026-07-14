@@ -28,8 +28,14 @@
   .skills-grid .cat { font-weight: 700; color: #0a2540; }
   .skills-grid .vals { color: #333; }
   .sub { font-size: 12.5px; font-weight: 600; color: #0a2540; }
+  .sub a { color: #1a73e8; font-weight: 600; text-decoration: none; margin-left: 6px; font-size: 11.5px; }
+  .sub a:hover { text-decoration: underline; }
   .small { font-size: 11.5px; }
-  @media print { body { background: #fff; padding: 0; } .page { box-shadow: none; padding: 0; } }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; padding: 0; }
+    .sub a::after { content: " (" attr(href) ")"; font-size: 10px; color: #666; font-weight: 400; }
+  }
 </style>
 </head>
 <body>
@@ -144,7 +150,7 @@
 
   <h2>Projetos Pessoais</h2>
   <div class="job">
-    <div class="sub">WadaIDE — IDE / agente de programação em Go</div>
+    <div class="sub">WadaIDE — IDE / agente de programação em Go <a href="https://www.youtube.com/watch?v=OLfAwU4AnCU" target="_blank" rel="noopener">▶ Ver vídeo</a></div>
     <ul>
       <li>IDE com IA integrada (inspirada em Cursor/VS Code): orquestração própria de LLMs, agent loop com ferramentas nativas.</li>
       <li>Modos Agent (autônomo), Ask (read-only) e Plan; sistema de Rules e Hooks; logs NDJSON com rastreio por request.</li>
@@ -153,7 +159,16 @@
     <div class="stack">Stack: Go · Vue 3 · SSE · HTTP/REST · Git · OpenRouter</div>
   </div>
   <div class="job">
-    <div class="sub">MeuZap.Chat — SaaS de atendimento WhatsApp com IA</div>
+    <div class="sub">WadaCode — CLI / agente de código com LLMs <a href="https://www.youtube.com/watch?v=UFbW434SYDQ" target="_blank" rel="noopener">▶ Ver vídeo</a></div>
+    <ul>
+      <li>CLI open source em Go com tool calling (bash, arquivos, diretórios); UI web opcional via <code>-serve</code>.</li>
+      <li>Suporte a modelos locais (Ollama, LM Studio, llama.cpp) e cloud; roteador híbrido local/cloud por complexidade, custo e privacidade.</li>
+      <li>Modo speculative (1+1): dispara modelo local e cloud em paralelo e escolhe a melhor resposta.</li>
+    </ul>
+    <div class="stack">Stack: Go · YAML config · OpenAI/Anthropic APIs · Ollama · tool calling · UI web</div>
+  </div>
+  <div class="job">
+    <div class="sub">MeuZap.Chat — SaaS de atendimento WhatsApp com IA <a href="https://www.youtube.com/watch?v=FdrecZjkHsc" target="_blank" rel="noopener">▶ Ver vídeo</a></div>
     <ul>
       <li>Produto próprio que transforma WhatsApp em canal de atendimento automatizado para pequenos negócios (vendas e suporte).</li>
       <li>Arquitetura em camadas, billing por créditos (Stripe), integração Evolution API + OpenAI com function calling e mitigação de prompt injection.</li>
