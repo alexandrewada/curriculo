@@ -837,7 +837,8 @@
         em fluxos críticos de ecom e saúde.
       </li>
       <li>
-        <strong>Filtros inteligentes (NLP):</strong> busca em linguagem natural que aplica filtros sozinha —
+        <strong>Filtros inteligentes (NLP / RAG):</strong> busca em linguagem natural com embeddings
+        que aplica filtros sozinha —
         ex.: “quero ração custo-benefício com até R$&nbsp;200 para meu cachorro pitbull”.
       </li>
       <li>
@@ -854,12 +855,12 @@
       </li>
       <li>
         <strong>AppSec &amp; DX:</strong> reporte de vulnerabilidades; deploys, alertas, filas
-        e observabilidade (Datadog/Honeycomb).
+        e observabilidade (Datadog / Honeycomb / OpenTelemetry).
       </li>
     </ul>
     <div class="stack">
       <span class="stack-label">Stack</span>
-      <span>Go</span><span>PHP/Laravel</span><span>Vue.js</span><span>Nuxt.js</span><span>Elixir</span><span>Ruby</span><span>Python</span><span>Redis</span><span>Cloudflare</span><span>Datadog</span><span>Honeycomb</span><span>LLMs/MCP</span><span>Google Product Studio</span>
+      <span>Go</span><span>PHP/Laravel</span><span>Vue.js</span><span>Nuxt.js</span><span>TypeScript</span><span>Elixir</span><span>Ruby</span><span>Python</span><span>Redis</span><span>Cloudflare</span><span>Datadog</span><span>Honeycomb</span><span>OpenTelemetry</span><span>LLMs/RAG/MCP</span><span>GitHub Actions</span><span>Google Product Studio</span>
     </div>
   </div>
 
@@ -895,8 +896,12 @@
       </li>
       <li>
         <strong>IA &amp; plataforma:</strong> automação e moderação;
-        microsserviços (PHP/Laravel, Go, Python), Redis/SQS/Elasticsearch,
-        CI/CD multi-cloud (AWS/GCP) e AppSec.
+        microsserviços (PHP/Laravel, Go, Python), Redis/SQS/Kafka/Elasticsearch,
+        APIs REST/GraphQL e gRPC, CI/CD multi-cloud (AWS/GCP) e AppSec.
+      </li>
+      <li>
+        <strong>Cloud-native:</strong> containers (Docker/Kubernetes), IaC (Terraform),
+        pipelines (GitHub Actions) e observabilidade (OpenTelemetry) em produção.
       </li>
       <li>
         <strong>Liderança:</strong> mentoria e code review de júnior/pleno,
@@ -905,7 +910,7 @@
     </ul>
     <div class="stack">
       <span class="stack-label">Stack</span>
-      <span>Go</span><span>PHP</span><span>Laravel</span><span>Python</span><span>MySQL</span><span>Redis</span><span>Elasticsearch</span><span>Docker</span><span>CI/CD</span><span>AWS</span><span>GCP</span><span>Vue/React</span><span>SQS</span>
+      <span>Go</span><span>PHP</span><span>Laravel</span><span>Python</span><span>TypeScript</span><span>MySQL</span><span>Redis</span><span>Elasticsearch</span><span>Kafka</span><span>GraphQL</span><span>gRPC</span><span>Docker</span><span>Kubernetes</span><span>Terraform</span><span>GitHub Actions</span><span>OpenTelemetry</span><span>AWS</span><span>GCP</span><span>Vue/React</span><span>SQS</span>
     </div>
   </div>
 
@@ -964,8 +969,8 @@
         sustentando o crescimento acelerado da operação de ensino.
       </li>
       <li>
-        <strong>DevOps &amp; CI/CD:</strong> pipelines de build/teste/deploy,
-        backup, DR, observabilidade e alta disponibilidade na AWS.
+        <strong>DevOps &amp; CI/CD:</strong> pipelines (GitHub Actions), Docker/Kubernetes,
+        Terraform (IaC), backup, DR, observabilidade e alta disponibilidade na AWS.
       </li>
       <li>
         <strong>Produção:</strong> incidentes críticos, RCA e melhorias de estabilidade;
@@ -978,7 +983,7 @@
     </ul>
     <div class="stack">
       <span class="stack-label">Stack</span>
-      <span>PHP</span><span>Laravel</span><span>CodeIgniter</span><span>Python</span><span>Go</span><span>MySQL</span><span>Vue</span><span>Angular</span><span>React</span><span>Docker</span><span>AWS</span><span>Cloudflare</span><span>CI/CD</span><span>Vindi</span><span>Mundipagg</span><span>Git</span>
+      <span>PHP</span><span>Laravel</span><span>CodeIgniter</span><span>Python</span><span>Go</span><span>MySQL</span><span>Vue</span><span>Angular</span><span>React</span><span>Docker</span><span>Kubernetes</span><span>Terraform</span><span>GitHub Actions</span><span>AWS</span><span>Cloudflare</span><span>CI/CD</span><span>Vindi</span><span>Mundipagg</span><span>Git</span>
     </div>
   </div>
 
@@ -1151,12 +1156,12 @@
     </div>
     <ul>
       <li>SaaS próprio: WhatsApp como canal de atendimento automatizado para PMEs (vendas e suporte), do onboarding ao billing.</li>
-      <li>Arquitetura em camadas, créditos via Stripe, Evolution API + OpenAI com function calling e mitigação de prompt injection.</li>
+      <li>Arquitetura em camadas, créditos via Stripe, Evolution API + OpenAI com function calling, RAG e mitigação de prompt injection.</li>
       <li><strong>Produto completo:</strong> backend, frontend, pagamentos e agente — desenhado para rodar em produção, não só demo.</li>
     </ul>
     <div class="stack">
       <span class="stack-label">Stack</span>
-      <span>Node.js 20</span><span>Fastify 5</span><span>Vue 3</span><span>Vite</span><span>PostgreSQL</span><span>Stripe</span><span>OpenAI</span><span>Evolution API</span>
+      <span>Node.js 20</span><span>Fastify 5</span><span>Vue 3</span><span>TypeScript</span><span>Vite</span><span>PostgreSQL</span><span>RAG / embeddings</span><span>Stripe</span><span>OpenAI</span><span>Evolution API</span>
     </div>
   </div>
   <div class="job">
@@ -1187,15 +1192,15 @@
     Competências Técnicas
   </h2>
   <div class="skills-grid">
-    <div><span class="cat">Linguagens</span> <span class="vals">Go, PHP, Python, Node.js, JavaScript/TypeScript, Shell/Bash · Elixir e Ruby (produção)</span></div>
-    <div><span class="cat">Backend</span> <span class="vals">Laravel, Fastify, APIs REST, microsserviços, filas (AWS SQS), Clean Architecture, SOLID, Design Patterns</span></div>
-    <div><span class="cat">Frontend</span> <span class="vals">Vue.js, Nuxt.js (SSR), Vite, Angular, React (atuação pontual), Core Web Vitals</span></div>
-    <div><span class="cat">Dados</span> <span class="vals">MySQL, PostgreSQL, MongoDB, Redis, Elasticsearch</span></div>
-    <div><span class="cat">Cloud &amp; DevOps</span> <span class="vals">AWS, GCP, Docker, CI/CD, Git, Linux, Cloudflare (CDN/WAF), multi-cloud</span></div>
-    <div><span class="cat">Observabilidade</span> <span class="vals">Datadog, Honeycomb, logs, métricas, tracing, RCA, resposta a incidentes</span></div>
-    <div><span class="cat">Segurança</span> <span class="vals">OWASP, AppSec, AuthN/AuthZ, IDOR / Broken Access Control, pentest web, bug bounty, threat modeling</span></div>
-    <div><span class="cat">IA</span> <span class="vals">LLMs, AI Agents, MCP, function calling, prompt engineering, mitigação de prompt injection, roteamento multi-provider, automação</span></div>
-    <div><span class="cat">Práticas</span> <span class="vals">System design, code review, mentoria, Scrum, SEO técnico, performance, automação/ETL</span></div>
+    <div><span class="cat">Linguagens</span> <span class="vals">Go, PHP, Python, Node.js, TypeScript, JavaScript, Shell/Bash · Elixir e Ruby (produção)</span></div>
+    <div><span class="cat">Backend</span> <span class="vals">Laravel, Fastify, APIs REST / GraphQL, gRPC, microsserviços, filas (AWS SQS / Kafka), event-driven, Clean Architecture, SOLID, Design Patterns</span></div>
+    <div><span class="cat">Frontend</span> <span class="vals">Vue.js, Nuxt.js (SSR), Vite, TypeScript, Angular, React (atuação pontual), Core Web Vitals</span></div>
+    <div><span class="cat">Dados</span> <span class="vals">SQL (MySQL, PostgreSQL), MongoDB, Redis, Elasticsearch · embeddings / vector DBs</span></div>
+    <div><span class="cat">Cloud &amp; DevOps</span> <span class="vals">AWS, GCP, Docker, Kubernetes, Terraform (IaC), CI/CD (GitHub Actions), Git, Linux, Cloudflare (CDN/WAF), multi-cloud</span></div>
+    <div><span class="cat">Observabilidade</span> <span class="vals">Datadog, Honeycomb, OpenTelemetry, logs, métricas, tracing, RCA, resposta a incidentes</span></div>
+    <div><span class="cat">Segurança</span> <span class="vals">OWASP, AppSec / DevSecOps, AuthN/AuthZ, IDOR / Broken Access Control, pentest web, bug bounty, threat modeling</span></div>
+    <div><span class="cat">IA</span> <span class="vals">LLMs, AI Agents, MCP, RAG, function calling, prompt engineering, mitigação de prompt injection, roteamento multi-provider, automação</span></div>
+    <div><span class="cat">Práticas</span> <span class="vals">System design, code review, mentoria, Agile / Scrum, SEO técnico, performance, automação/ETL</span></div>
     <div><span class="cat">Domínios</span> <span class="vals">E-commerce / marketplace, EdTech, pagamentos (Stripe, Vindi, Mundipagg), ERP, franquias, campanhas promocionais, AppSec</span></div>
   </div>
 
