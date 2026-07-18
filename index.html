@@ -35,6 +35,7 @@
       var(--bg);
     padding: 28px 16px 48px;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 
   .page {
@@ -45,6 +46,7 @@
     position: relative;
     border: 1px solid rgba(12, 18, 34, 0.06);
     box-shadow: 0 12px 40px rgba(12, 18, 34, 0.08);
+    overflow-wrap: break-word;
   }
 
   .page::before {
@@ -116,6 +118,17 @@
     font-weight: 600;
     margin-top: 5px;
     letter-spacing: -0.01em;
+    line-height: 1.4;
+    text-wrap: balance;
+    max-width: 54ch;
+  }
+  .headline .subline {
+    display: block;
+    margin-top: 3px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    letter-spacing: -0.005em;
   }
 
   .status {
@@ -127,6 +140,7 @@
     color: var(--ink-soft);
     margin-top: 8px;
     font-weight: 500;
+    line-height: 1.45;
   }
   .status .dot {
     width: 7px;
@@ -224,15 +238,17 @@
 
   .summary {
     font-size: 13px;
-    line-height: 1.65;
+    line-height: 1.7;
     color: var(--ink-soft);
-    max-width: 68ch;
+    max-width: 72ch;
+    text-wrap: pretty;
   }
-  .summary p + p { margin-top: 8px; }
+  .summary p { margin: 0; }
+  .summary p + p { margin-top: 9px; }
 
   /* —— Jobs —— */
   .job {
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     padding: 0 0 2px 16px;
     border-left: 2px solid var(--line);
     position: relative;
@@ -255,16 +271,26 @@
     color: var(--ink);
     letter-spacing: -0.015em;
     line-height: 1.35;
+    text-wrap: balance;
   }
   .job .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 0;
     font-size: 12px;
     color: var(--muted);
-    margin: 4px 0 8px;
-    line-height: 1.45;
+    margin: 5px 0 9px;
+    line-height: 1.5;
   }
   .job .meta .period {
     color: var(--accent-deep);
     font-weight: 600;
+  }
+  .job .meta .sep {
+    margin: 0 7px;
+    color: var(--line);
+    font-weight: 400;
   }
   .job .stack {
     display: flex;
@@ -299,11 +325,12 @@
   .job li {
     position: relative;
     font-size: 12.5px;
-    line-height: 1.55;
-    margin-bottom: 6px;
+    line-height: 1.6;
+    margin-bottom: 7px;
     padding-left: 14px;
     color: var(--ink-soft);
-    max-width: 70ch;
+    max-width: 72ch;
+    text-wrap: pretty;
   }
   .job li::before {
     content: "";
@@ -351,10 +378,11 @@
 
   .sec-lead {
     font-size: 13px;
-    line-height: 1.65;
+    line-height: 1.7;
     color: var(--ink-soft);
     margin-bottom: 10px;
-    max-width: 68ch;
+    max-width: 72ch;
+    text-wrap: pretty;
   }
   .sec-list {
     margin: 0;
@@ -420,20 +448,77 @@
   .lang-row strong { color: var(--ink); font-weight: 600; }
 
   @media (max-width: 680px) {
-    .page { padding: 28px 22px 32px; }
+    body { padding: 12px 10px 32px; }
+    .page {
+      padding: 24px 18px 28px;
+      border-radius: 0;
+    }
+    .page::before { width: 3px; }
+
     .header {
       flex-direction: column;
       align-items: center;
       text-align: center;
       padding-right: 0;
+      gap: 14px;
     }
-    .contact { justify-content: center; }
+    .photo {
+      width: 96px;
+      height: 96px;
+    }
+    h1 { font-size: 24px; }
+    .headline { max-width: none; font-size: 13px; }
+    .headline .subline { font-size: 12px; }
+
+    .contact {
+      justify-content: center;
+      gap: 8px 12px;
+    }
+    .contact a,
+    .contact .loc {
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
     .highlights { justify-content: center; }
     .status { justify-content: center; }
-    .print-btn { position: static; margin: 0 0 16px auto; display: flex; }
+
+    .print-btn {
+      position: static;
+      margin: 0 0 14px auto;
+      display: flex;
+    }
+
+    .summary,
+    .sec-lead,
+    .job li,
+    .sec-list li {
+      max-width: none;
+    }
+
+    .job {
+      margin-left: 2px;
+      padding-left: 14px;
+    }
+    .job .meta { gap: 2px 0; }
+    .job .stack span:not(.stack-label) {
+      font-size: 10.5px;
+      padding: 3px 7px;
+    }
+
     .skills-grid { grid-template-columns: 1fr; }
-    .sub { justify-content: center; flex-direction: column; align-items: flex-start; }
-    .job { margin-left: 4px; }
+    .sub {
+      justify-content: flex-start;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .page { padding: 20px 14px 24px; }
+    h1 { font-size: 22px; }
+    .highlights span { font-size: 10.5px; padding: 3px 8px; }
+    .contact { font-size: 11.5px; }
   }
 
   @media print {
@@ -442,21 +527,24 @@
       print-color-adjust: exact !important;
     }
 
-    @page { margin: 0.7cm; size: A4; }
+    @page { margin: 0.65cm; size: A4; }
 
-    body {
+    html, body {
       background: #fff !important;
       padding: 0 !important;
-      line-height: 1.35;
-      font-size: 10.5pt;
+      margin: 0 !important;
+      line-height: 1.32;
+      font-size: 10pt;
+      width: 100%;
     }
 
     .page {
       box-shadow: none !important;
       border: none !important;
-      padding: 0 0 0 6px !important;
+      padding: 0 0 0 5px !important;
       max-width: none !important;
       width: 100% !important;
+      margin: 0 !important;
     }
 
     .page::before { width: 2.5px; }
@@ -464,42 +552,45 @@
     .print-btn { display: none !important; }
 
     .header {
-      gap: 14px;
-      padding-bottom: 10px;
+      gap: 12px;
+      padding-bottom: 8px;
       padding-right: 0 !important;
       align-items: flex-start;
+      break-inside: avoid;
+      page-break-inside: avoid;
     }
 
     .photo {
-      width: 78px;
-      height: 78px;
+      width: 70px;
+      height: 70px;
       border-width: 2px;
       outline-offset: 2px;
     }
 
-    h1 { font-size: 18pt; letter-spacing: -0.02em; }
-    .headline { font-size: 9pt; margin-top: 2px; }
-    .status { font-size: 8pt; margin-top: 4px; gap: 4px; }
-    .status .dot { width: 5px; height: 5px; box-shadow: 0 0 0 2px rgba(26, 127, 55, 0.18); }
-    .contact { gap: 3px 10px; margin-top: 6px; font-size: 8pt; }
-    .contact svg { width: 10px; height: 10px; }
-    .highlights { gap: 4px; margin-top: 8px; }
+    h1 { font-size: 16pt; letter-spacing: -0.02em; }
+    .headline { font-size: 8.5pt; margin-top: 2px; line-height: 1.3; max-width: none; }
+    .headline .subline { font-size: 7.5pt; margin-top: 1px; }
+    .status { font-size: 7.5pt; margin-top: 3px; gap: 3px; }
+    .status .dot { width: 4.5px; height: 4.5px; box-shadow: 0 0 0 2px rgba(26, 127, 55, 0.18); }
+    .contact { gap: 2px 8px; margin-top: 5px; font-size: 7.5pt; }
+    .contact svg { width: 9px; height: 9px; }
+    .highlights { gap: 3px; margin-top: 6px; }
     .highlights span {
-      font-size: 7.5pt;
-      padding: 2px 6px;
+      font-size: 7pt;
+      padding: 1.5px 5px;
       border-radius: 3px;
     }
 
     h2 {
-      font-size: 8.5pt;
-      margin: 11px 0 6px;
-      gap: 6px;
+      font-size: 8pt;
+      margin: 9px 0 5px;
+      gap: 5px;
       letter-spacing: 0.1em;
       break-after: avoid;
       page-break-after: avoid;
     }
-    h2 .ico { width: 16px; height: 16px; border-radius: 4px; }
-    h2 .ico svg { width: 9px; height: 9px; }
+    h2 .ico { width: 14px; height: 14px; border-radius: 3px; }
+    h2 .ico svg { width: 8px; height: 8px; }
 
     .summary,
     .sec-lead,
@@ -509,93 +600,104 @@
     }
 
     .summary {
-      font-size: 9pt;
-      line-height: 1.4;
+      font-size: 8.5pt;
+      line-height: 1.35;
     }
-    .summary p + p { margin-top: 4px; }
+    .summary p + p { margin-top: 2.5px; }
 
+    /* Jobs longos PODEM quebrar página — avoid só no título/meta */
     .job {
-      margin-bottom: 9px;
-      padding-left: 12px;
+      margin-bottom: 7px;
+      padding-left: 11px;
+      break-inside: auto;
+      page-break-inside: auto;
+    }
+    .job .role,
+    .job .meta {
+      break-after: avoid;
+      page-break-after: avoid;
+    }
+    .job::before {
+      width: 5px;
+      height: 5px;
+      left: -3.5px;
+      top: 5px;
+    }
+    .job .role { font-size: 9.5pt; }
+    .job .meta { font-size: 7.5pt; margin: 1px 0 3px; gap: 0; }
+    .job .meta .sep { margin: 0 4px; }
+    .job li {
+      font-size: 8pt;
+      line-height: 1.32;
+      margin-bottom: 2px;
+      padding-left: 10px;
+      orphans: 2;
+      widows: 2;
+    }
+    .job li::before {
+      width: 3px;
+      height: 3px;
+      top: 0.45em;
+    }
+    .job .stack {
+      gap: 2px;
+      margin-top: 4px;
       break-inside: avoid;
       page-break-inside: avoid;
     }
-    .job::before {
-      width: 6px;
-      height: 6px;
-      left: -4px;
-      top: 5px;
-    }
-    .job .role { font-size: 10pt; }
-    .job .meta { font-size: 8pt; margin: 1px 0 4px; }
-    .job li {
-      font-size: 8.5pt;
-      line-height: 1.35;
-      margin-bottom: 2.5px;
-      padding-left: 11px;
-    }
-    .job li::before {
-      width: 3.5px;
-      height: 3.5px;
-      top: 0.45em;
-    }
-    .job .stack { gap: 3px; margin-top: 5px; }
-    .job .stack .stack-label { font-size: 7pt; }
+    .job .stack .stack-label { font-size: 6.5pt; }
     .job .stack span:not(.stack-label) {
-      font-size: 7.5pt;
-      padding: 1.5px 5px;
-      border-radius: 3px;
+      font-size: 7pt;
+      padding: 1px 4px;
+      border-radius: 2px;
     }
 
     .sub {
-      font-size: 9.5pt;
-      margin-bottom: 3px;
-      gap: 6px;
+      font-size: 9pt;
+      margin-bottom: 2px;
+      gap: 5px;
+      break-after: avoid;
+      page-break-after: avoid;
     }
-    .sub a { font-size: 8pt; }
-    .sub a::after {
-      content: " (" attr(href) ")";
-      font-size: 7pt;
-      color: var(--muted);
-      font-weight: 400;
-    }
+    .sub a { font-size: 7.5pt; }
+    /* Evita URLs gigantes do YouTube no PDF */
+    .sub a::after { content: none; }
 
     .sec-lead {
-      font-size: 9pt;
-      line-height: 1.4;
-      margin-bottom: 5px;
-    }
-    .sec-list li {
       font-size: 8.5pt;
       line-height: 1.35;
-      margin-bottom: 3px;
-      padding-left: 11px;
+      margin-bottom: 4px;
+    }
+    .sec-list li {
+      font-size: 8pt;
+      line-height: 1.32;
+      margin-bottom: 2px;
+      padding-left: 10px;
     }
     .sec-list li::before {
-      width: 3.5px;
-      height: 3.5px;
+      width: 3px;
+      height: 3px;
       top: 0.45em;
     }
 
     .skills-grid {
-      gap: 4px 16px;
+      gap: 3px 14px;
     }
     .skills-grid > div {
-      gap: 2px;
-      padding-bottom: 5px;
+      gap: 1px;
+      padding-bottom: 4px;
       break-inside: avoid;
       page-break-inside: avoid;
     }
-    .skills-grid .cat { font-size: 7.5pt; }
-    .skills-grid .vals { font-size: 8pt; line-height: 1.35; }
+    .skills-grid .cat { font-size: 7pt; }
+    .skills-grid .vals { font-size: 7.5pt; line-height: 1.3; }
 
-    .small, .lang-row { font-size: 9pt; line-height: 1.35; }
-    .lang-row { gap: 3px; }
+    .small, .lang-row { font-size: 8.5pt; line-height: 1.3; }
+    .lang-row { gap: 2px; }
 
     a { color: inherit; text-decoration: none; }
     .contact a { color: var(--ink-soft); }
 
-    /* Evita título isolado no fim da página */
     h2 + .summary,
     h2 + .job,
     h2 + .sec-lead,
@@ -619,15 +721,22 @@
     <img class="photo" src="foto.jpg?v=5" alt="Alexandre Riuti Wada" width="108" height="108">
     <div class="header-text">
       <h1>Alexandre Riuti Wada</h1>
-      <div class="headline">Senior / Tech Lead / Principal Software Engineer · Backend, Arquitetura &amp; AppSec · IA Aplicada</div>
+      <div class="headline">
+        Senior / Staff Software Engineer · Tech Lead
+        <span class="subline">Backend, Arquitetura &amp; AppSec · IA Aplicada</span>
+      </div>
       <div class="status">
         <span class="dot" aria-hidden="true"></span>
         Aberto a oportunidades
         <span class="sep">·</span> Remoto / híbrido / presencial
         <span class="sep">·</span> CLT, PJ ou consultoria
-        <span class="sep">·</span> Disponibilidade imediata ou conforme aviso
+        <span class="sep">·</span> Disponibilidade imediata
       </div>
       <div class="contact">
+        <span class="loc">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          02/05/1993 · <span id="age">33 anos</span> · Casado
+        </span>
         <span class="loc">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           São Paulo, Brasil
@@ -659,12 +768,12 @@
       </div>
       <div class="highlights">
         <span>15+ anos</span>
-        <span>Backend &amp; sistemas distribuídos</span>
-        <span>Tech Lead / Principal</span>
+        <span>4 promoções na Atlas</span>
+        <span>8 anos Principal · EdTech</span>
+        <span>Tech Lead / Staff</span>
         <span>AppSec &amp; bug bounty</span>
-        <span>Cloud AWS/GCP</span>
         <span>IA / LLM agents</span>
-        <span>E-commerce · EdTech · Pagamentos</span>
+        <span>82 freelas · nota 4,83</span>
       </div>
     </div>
   </header>
@@ -677,17 +786,30 @@
   </h2>
   <div class="summary">
     <p>
-      Engenheiro de Software com mais de 15 anos construindo e evoluindo plataformas web de produção —
+      Senior / Staff Software Engineer e Tech Lead com mais de 15 anos em plataformas de produção —
       backend, arquitetura, performance, cloud e liderança técnica.
     </p>
     <p>
-      Passagem por e-commerce de alto tráfego (Petlove), produtos com microsserviços multi-cloud (Atlas)
-      e ownership completo de plataforma EdTech/pagamentos por 8 anos (Inglês 200 Horas).
-      Atua na interseção entre engenharia e segurança (AppSec, revisão de APIs, bug bounty)
-      e desenvolve produtos próprios com IA (agentes LLM, automação de atendimento).
+      Destaques:
+      <strong>4 promoções em ~2 anos e 10 meses na Atlas</strong>,
+      <strong>8 anos como Principal Engineer</strong> na Inglês 200 Horas
+      (~100 → 50k+ concorrentes) e produtos próprios com IA (WadaIDE, WadaCode, MeuZap).
     </p>
     <p>
-      Confortável em decisões de arquitetura, mentoria, incidentes em produção e entrega end-to-end.
+      Na Petlove: performance, SEO e IA no e-commerce
+      (busca em linguagem natural, cadastro em massa e Stargazer).
+    </p>
+    <p>
+      Na Atlas (FatalModel.com, à época entre os 25 sites mais acessados do Brasil):
+      Stories, Reviews, recomendação, antifraude e IA em escala de milhões de usuários.
+    </p>
+    <p>
+      Antes, na Inglês 200 Horas: Principal Engineer — microsserviços na AWS,
+      ERP/pagamentos/franquias e escala de ~100 para 50k+ usuários concorrentes.
+    </p>
+    <p>
+      Atua na interseção engenharia + segurança (AppSec, APIs, bug bounty)
+      e executa do zero à produção: arquitetura, mentoria e resposta a incidentes.
     </p>
   </div>
 
@@ -699,22 +821,45 @@
   </h2>
 
   <div class="job">
-    <div class="role">Full Stack Engineer — Petlove</div>
+    <div class="role">Software Engineer — Petlove</div>
     <div class="meta">
-      <span class="period">out/2025 – mai/2026 (encerrado)</span>
-      &nbsp;·&nbsp; São Paulo (Remoto) &nbsp;·&nbsp; Squad SEO · marketplace pet de alto tráfego
+      <span class="period">out/2025 – mai/2026</span>
+      <span class="sep">·</span> São Paulo (Remoto)
+      <span class="sep">·</span> Ecom · Saúde · SEO · marketplace pet de alto tráfego
     </div>
     <ul>
-      <li><strong>Escopo:</strong> ~8 meses no squad SEO de um dos maiores marketplaces pet do Brasil, em aplicações de catálogo e aquisição orgânica.</li>
-      <li>Performance web e backend: Core Web Vitals (LCP, INP, CLS), tempo de resposta de APIs, cache, SSR com Nuxt e metadata dinâmica.</li>
-      <li>SEO técnico: crawlabilidade, indexação, arquitetura de informação e páginas de alto volume.</li>
-      <li>IA aplicada ao catálogo: geração/enriquecimento de conteúdo, sugestão de palavras-chave, otimização de imagens e automações com LLMs/MCP.</li>
-      <li>Observabilidade e incidentes com Datadog/Honeycomb (latência, tracing, dashboards); colaboração cross-functional com Produto, SEO, Dados e Negócio.</li>
-      <li>Identificação e reporte de vulnerabilidades web ao time de Segurança, com priorização e acompanhamento de correção.</li>
+      <li>
+        <strong>Escopo:</strong> ~8 meses no ecossistema Petlove (e-commerce e saúde) —
+        performance web/backend, IA no catálogo, SEO técnico, AppSec e DX.
+      </li>
+      <li>
+        <strong>Performance:</strong> Core Web Vitals (LCP, INP, CLS), APIs, cache, SSR (Nuxt) e Cloudflare
+        em fluxos críticos de ecom e saúde.
+      </li>
+      <li>
+        <strong>Filtros inteligentes (NLP):</strong> busca em linguagem natural que aplica filtros sozinha —
+        ex.: “quero ração custo-benefício com até R$&nbsp;200 para meu cachorro pitbull”.
+      </li>
+      <li>
+        <strong>Cadastro em massa com IA:</strong> pipeline para enriquecer produtos em escala
+        (título, descrição e atributos), sem redação manual.
+      </li>
+      <li>
+        <strong>Stargazer:</strong> otimização de imagem, título e descrição com Google Product Studio
+        para keywords, discovery e SEO.
+      </li>
+      <li>
+        <strong>SEO técnico:</strong> crawlabilidade, indexação, metadata dinâmica
+        e páginas de alto volume de catálogo.
+      </li>
+      <li>
+        <strong>AppSec &amp; DX:</strong> reporte de vulnerabilidades; deploys, alertas, filas
+        e observabilidade (Datadog/Honeycomb).
+      </li>
     </ul>
     <div class="stack">
       <span class="stack-label">Stack</span>
-      <span>Go</span><span>PHP/Laravel</span><span>Vue.js</span><span>Nuxt.js</span><span>Elixir</span><span>Ruby</span><span>Python</span><span>Redis</span><span>Cloudflare</span><span>Datadog</span><span>Honeycomb</span><span>LLMs/MCP</span>
+      <span>Go</span><span>PHP/Laravel</span><span>Vue.js</span><span>Nuxt.js</span><span>Elixir</span><span>Ruby</span><span>Python</span><span>Redis</span><span>Cloudflare</span><span>Datadog</span><span>Honeycomb</span><span>LLMs/MCP</span><span>Google Product Studio</span>
     </div>
   </div>
 
@@ -722,17 +867,41 @@
     <div class="role">Senior Backend Engineer III / Tech Lead — Atlas Technologies</div>
     <div class="meta">
       <span class="period">dez/2022 – set/2025</span>
-      &nbsp;·&nbsp; São Paulo (Remoto) &nbsp;·&nbsp; Progressão Mid III → Senior I → Senior II → Senior III / Tech Lead
+      <span class="sep">·</span> São Paulo (Remoto)
+      <span class="sep">·</span> FatalModel.com
+      <span class="sep">·</span> Progressão Mid III → Senior I → Senior II → Senior III / Tech Lead
     </div>
     <ul>
-      <li><strong>Métrica de carreira:</strong> 4 promoções em ~2 anos e 10 meses (Mid III → Senior I → Senior II → Senior III / Tech Lead).</li>
-      <li>Desenvolvimento e evolução de backends e APIs REST em PHP/Laravel, Go e Python, em arquitetura de microsserviços.</li>
-      <li>Participação em decisões arquiteturais, code review, padronização (SOLID/Clean Code) e definição de práticas de engenharia.</li>
-      <li>Performance: otimização de consultas SQL, índices, cache (Redis), filas (AWS SQS) e busca com Elasticsearch.</li>
-      <li>CI/CD, containers Docker e automações de deploy em cenários multi-cloud (AWS e GCP); deploys críticos e mitigação de incidentes.</li>
-      <li>Observabilidade (logs, métricas, alertas), RCA e troubleshooting avançado em produção.</li>
-      <li>AppSec interno: identificação e reporte de vulnerabilidades em APIs/serviços; hardening e proteção de endpoints junto ao time de segurança.</li>
-      <li><strong>Time / liderança:</strong> mentoria e code review de engenheiros júnior e pleno; tech talks internas; apoio a Scrum e POCs de inovação.</li>
+      <li>
+        <strong>Escopo:</strong> FatalModel.com — alto tráfego
+        (à época entre os 25 sites mais acessados do Brasil),
+        milhões de usuários e milhares de anunciantes.
+      </li>
+      <li>
+        <strong>Métrica de carreira:</strong> 4 promoções em ~2 anos e 10 meses
+        (Mid III → Senior I → Senior II → Senior III / Tech Lead).
+      </li>
+      <li>
+        <strong>Stories:</strong> arquitetura inspirada no Instagram,
+        para milhões de usuários com baixa latência e alta concorrência.
+      </li>
+      <li>
+        <strong>Reviews:</strong> pipeline para processar e servir milhares de avaliações
+        em tempo real.
+      </li>
+      <li>
+        <strong>Q&amp;A, recomendação e antifraude:</strong> engajamento, personalização
+        por comportamento e mitigação de abuso.
+      </li>
+      <li>
+        <strong>IA &amp; plataforma:</strong> automação e moderação;
+        microsserviços (PHP/Laravel, Go, Python), Redis/SQS/Elasticsearch,
+        CI/CD multi-cloud (AWS/GCP) e AppSec.
+      </li>
+      <li>
+        <strong>Liderança:</strong> mentoria e code review de júnior/pleno,
+        tech talks e POCs de inovação.
+      </li>
     </ul>
     <div class="stack">
       <span class="stack-label">Stack</span>
@@ -741,34 +910,75 @@
   </div>
 
   <div class="job">
-    <div class="role">Freelance Full Stack — 99Freelas</div>
+    <div class="role">Full Stack Engineer — 99Freelas</div>
     <div class="meta">
       <span class="period">jul/2022 – nov/2022</span>
-      &nbsp;·&nbsp; Remoto &nbsp;·&nbsp; transição entre Inglês 200 Horas e Atlas Technologies
+      <span class="sep">·</span> Remoto
+      <span class="sep">·</span> Freelas sob demanda
+      <span class="sep">·</span> Transição entre Inglês 200 Horas e Atlas Technologies
     </div>
     <ul>
-      <li>Projetos sob demanda (APIs, sistemas web, integrações e manutenção) cobrindo o intervalo entre as duas experiências CLT.</li>
-    </ul>
-  </div>
-
-  <div class="job">
-    <div class="role">Tech Lead / Principal Engineer — Inglês 200 Horas</div>
-    <div class="meta">
-      <span class="period">jun/2014 – jun/2022</span>
-      &nbsp;·&nbsp; São Paulo (Presencial) &nbsp;·&nbsp; EdTech · ERP · pagamentos · franquias
-    </div>
-    <ul>
-      <li><strong>Escopo:</strong> ~8 anos como principal referência técnica da plataforma, com ownership do ciclo completo (código, banco, infra, deploy e sustentação).</li>
-      <li>Modernização de legado (PHP 5 / jQuery) para Laravel no backend e Angular 2+ / Vue / React no frontend; migração gradual monolito → serviços.</li>
-      <li>Arquitetura de ERP proprietário (alunos, cursos, financeiro, estoque, vendas, franquias e comissões) e call center com dashboards operacionais.</li>
-      <li>Checkout próprio integrado a gateways (Vindi, Mundipagg), com fallback, recorrência e foco em confiabilidade do fluxo de receita.</li>
-      <li>Plataforma de gamificação / indicação com hierarquia e cálculo de comissões; forte colaboração com produto e negócio.</li>
-      <li>Infraestrutura em AWS e Cloudflare (CDN, WAF); pipelines CI/CD; otimização de queries N+1, cache e índices em picos de acesso.</li>
-      <li><strong>Time / liderança:</strong> mentoria contínua, code review e padronização de engenharia (Design Patterns, Clean Code) com o time de desenvolvimento.</li>
+      <li><strong>Escopo:</strong> soluções sob demanda (web, APIs, automações e integrações) do requisito à produção, para clientes de diversos segmentos.</li>
+      <li><strong>PrestaShop:</strong> módulo logístico com frete por CEP/peso e múltiplas transportadoras; bots Telegram, Web Scraping e gateways (Stripe, Mercado Pago).</li>
+      <li>Sistemas completos (backend, banco e frontend), apps mobile integradas, WordPress/WooCommerce e sustentação de legados em produção.</li>
     </ul>
     <div class="stack">
       <span class="stack-label">Stack</span>
-      <span>PHP</span><span>Laravel</span><span>CodeIgniter</span><span>Python</span><span>Go</span><span>MySQL</span><span>Vue</span><span>Angular</span><span>Docker</span><span>AWS</span><span>Cloudflare</span><span>CI/CD</span><span>Git</span>
+      <span>PHP</span><span>Node.js</span><span>JavaScript</span><span>MySQL</span><span>PostgreSQL</span><span>REST</span><span>WordPress</span><span>PrestaShop</span><span>WooCommerce</span><span>Telegram Bots</span><span>Stripe</span><span>Mercado Pago</span><span>Git</span><span>Linux</span>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="role">Principal Engineer / Tech Lead — Inglês 200 Horas</div>
+    <div class="meta">
+      <span class="period">jun/2014 – jun/2022</span>
+      <span class="sep">·</span> São Paulo (Presencial)
+      <span class="sep">·</span> EdTech · ERP · pagamentos · franquias
+    </div>
+    <ul>
+      <li>
+        <strong>Escopo:</strong> ~8 anos como Principal Engineer —
+        liderou a modernização tecnológica, a estratégia de arquitetura
+        e o ownership end-to-end da plataforma.
+      </li>
+      <li>
+        <strong>Escala:</strong> elevou a capacidade de ~100 para
+        <strong>50k+ usuários concorrentes</strong>, com alta disponibilidade
+        em picos de matrícula e campanhas.
+      </li>
+      <li>
+        <strong>Arquitetura:</strong> migração gradual de monolito legado
+        para microsserviços e sistemas distribuídos na AWS
+        (escalabilidade horizontal, resiliência e evolução contínua).
+      </li>
+      <li>
+        <strong>Modernização de stack:</strong> PHP 5 / jQuery / CodeIgniter → Laravel
+        e Angular 2+ / Vue / React; APIs, cache e otimização de desempenho.
+      </li>
+      <li>
+        <strong>ERP &amp; produtos:</strong> alunos, turmas, matrículas, financeiro, estoque,
+        vendas, franquias, comissões, call center e checkout (Vindi/Mundipagg).
+      </li>
+      <li>
+        <strong>Digital:</strong> transição do modelo presencial para o digital,
+        sustentando o crescimento acelerado da operação de ensino.
+      </li>
+      <li>
+        <strong>DevOps &amp; CI/CD:</strong> pipelines de build/teste/deploy,
+        backup, DR, observabilidade e alta disponibilidade na AWS.
+      </li>
+      <li>
+        <strong>Produção:</strong> incidentes críticos, RCA e melhorias de estabilidade;
+        balanceamento, cache e planejamento de resiliência/tolerância a falhas.
+      </li>
+      <li>
+        <strong>Liderança:</strong> time de até <strong>8 desenvolvedores</strong> —
+        mentoria, code review, padrões de engenharia e decisões estratégicas de tecnologia.
+      </li>
+    </ul>
+    <div class="stack">
+      <span class="stack-label">Stack</span>
+      <span>PHP</span><span>Laravel</span><span>CodeIgniter</span><span>Python</span><span>Go</span><span>MySQL</span><span>Vue</span><span>Angular</span><span>React</span><span>Docker</span><span>AWS</span><span>Cloudflare</span><span>CI/CD</span><span>Vindi</span><span>Mundipagg</span><span>Git</span>
     </div>
   </div>
 
@@ -776,16 +986,49 @@
     <div class="role">Full Stack Engineer — Ideas Promoções e Eventos</div>
     <div class="meta">
       <span class="period">jan/2012 – dez/2013</span>
-      &nbsp;·&nbsp; São Paulo (Presencial) &nbsp;·&nbsp; Agência · promoções e campanhas
+      <span class="sep">·</span> São Paulo (Presencial)
+      <span class="sep">·</span> Agência · campanhas nacionais · Nestlé, Parmalat, Toddy e outras
     </div>
     <ul>
-      <li><strong>Escopo:</strong> ciclo completo para clientes de médio e grande porte em campanhas digitais com picos de acesso.</li>
-      <li>Sistemas de promoções e sorteios com mecânicas auditáveis, cadastros em escala e sustentação pós-campanha.</li>
-      <li>Modelagem e otimização SQL; automações/ETL em Python e Shell; administração Linux/Apache; landing pages WordPress.</li>
+      <li>
+        <strong>Escopo:</strong> engenharia de campanhas promocionais para grandes marcas
+        (Nestlé, Parmalat, Toddy e outras) — sistemas de alta disponibilidade
+        e alcance nacional em TV e digital.
+      </li>
+      <li>
+        <strong>Promoções &amp; sorteios:</strong> plataformas de cadastro de códigos de barras,
+        participação em mecânicas auditáveis e validação antifraude
+        para garantir integridade das campanhas.
+      </li>
+      <li>
+        <strong>Escala:</strong> arquitetura para picos de rede nacional —
+        alto volume de cadastros concorrentes e milhões de acessos
+        nos períodos de maior demanda.
+      </li>
+      <li>
+        <strong>TV ao vivo:</strong> sorteios em tempo real durante comerciais de TV aberta,
+        com baixa latência e confiabilidade sob audiência massiva.
+      </li>
+      <li>
+        <strong>Engajamento:</strong> enquetes, campanhas interativas
+        e competições entre funcionários / públicos internos.
+      </li>
+      <li>
+        <strong>Backoffice:</strong> configuração de campanhas, auditoria, métricas,
+        operação dos sorteios e acompanhamento operacional ponta a ponta.
+      </li>
+      <li>
+        <strong>Plataforma:</strong> concorrência, performance e confiabilidade;
+        modelagem SQL, ETL (Python/Shell), landing pages e admin Linux/Apache.
+      </li>
+      <li>
+        <strong>Entrega:</strong> ciclo completo — levantamento, desenvolvimento,
+        deploy e sustentação pós-campanha em janelas críticas de mídia.
+      </li>
     </ul>
     <div class="stack">
       <span class="stack-label">Stack</span>
-      <span>PHP</span><span>Laravel</span><span>CodeIgniter</span><span>Zend</span><span>Python</span><span>MySQL</span><span>MongoDB</span><span>AngularJS</span><span>Bootstrap</span><span>WordPress</span><span>Linux</span>
+      <span>PHP</span><span>CodeIgniter</span><span>Zend</span><span>Python</span><span>MySQL</span><span>MongoDB</span><span>AngularJS</span><span>Bootstrap</span><span>WordPress</span><span>Linux</span><span>Apache</span>
     </div>
   </div>
 
@@ -793,15 +1036,48 @@
     <div class="role">Full Stack Engineer — Lupa Clipping</div>
     <div class="meta">
       <span class="period">jan/2010 – dez/2011</span>
-      &nbsp;·&nbsp; São Paulo (Presencial) &nbsp;·&nbsp; Início de carreira
+      <span class="sep">·</span> São Paulo (Presencial)
+      <span class="sep">·</span> Monitoramento de mídia · inteligência de mercado
+      <span class="sep">·</span> Início de carreira
     </div>
     <ul>
-      <li>Desenvolvimento e sustentação de aplicações web (PHP, JavaScript, MySQL) e automações de processos internos.</li>
-      <li>Integrações via APIs, SOAP e XML; administração de intranet Linux/Apache/MySQL; suporte e scripts operacionais.</li>
+      <li>
+        <strong>Escopo:</strong> empresa de monitoramento de mídia digital
+        e inteligência de mercado — acompanhamento em tempo real da presença
+        de marcas na internet.
+      </li>
+      <li>
+        <strong>Fontes:</strong> portais de notícias, Globo.com, Google News,
+        blogs, sites de entretenimento e redes de conteúdo.
+      </li>
+      <li>
+        <strong>Plataforma 24h:</strong> Web Scraping e classificação automatizada
+        de menções — substituiu pesquisa manual e elevou a produtividade da equipe.
+      </li>
+      <li>
+        <strong>Coleta &amp; processamento:</strong> identificação, coleta e consolidação
+        contínua de menções, com foco em volume, recorrência e entrega operacional.
+      </li>
+      <li>
+        <strong>Sistemas internos:</strong> intranet, automações operacionais,
+        CRM de clientes e plataforma de e-mail marketing / campanhas em massa.
+      </li>
+      <li>
+        <strong>Infra:</strong> administração de servidores, hospedagem LAMP,
+        suporte técnico a colaboradores e manutenção de ambientes de produção.
+      </li>
+      <li>
+        <strong>Evolução:</strong> modernização de legados, redução de tarefas repetitivas
+        e otimização de processos internos via software.
+      </li>
+      <li>
+        <strong>Base:</strong> automação, coleta de dados em volume, integrações SOAP/XML
+        e stack PHP / JavaScript / MySQL / Python.
+      </li>
     </ul>
     <div class="stack">
       <span class="stack-label">Stack</span>
-      <span>PHP</span><span>JavaScript</span><span>MySQL</span><span>Python</span><span>Linux</span><span>Apache</span><span>SOAP/XML</span>
+      <span>PHP</span><span>JavaScript</span><span>MySQL</span><span>Python</span><span>Web Scraping</span><span>Linux</span><span>Apache</span><span>SOAP/XML</span>
     </div>
   </div>
 
@@ -812,13 +1088,14 @@
     Segurança Ofensiva &amp; AppSec
   </h2>
   <p class="sec-lead">
-    Atuação paralela em segurança ofensiva via programas públicos e privados de bug bounty (fintech, bancos digitais, cripto e iGaming),
-    somada a AppSec no dia a dia de engenharia.
+    Atuação paralela em segurança ofensiva
+    (bug bounty público e privado: fintech, bancos digitais, cripto e iGaming)
+    e AppSec no dia a dia de engenharia — Atlas e Petlove.
   </p>
   <ul class="sec-list">
-    <li>Foco em Business Logic Flaws, Broken Access Control, IDOR, falhas de autenticação/autorização, injeções e exposição de dados.</li>
-    <li>Análise de superfície de ataque em APIs e aplicações web; reporte responsável e colaboração com times de segurança (Atlas, Petlove).</li>
-    <li>Aplicação prática de OWASP Top 10, revisão de código com viés de segurança e hardening de APIs.</li>
+    <li><strong>Foco ofensivo:</strong> Business Logic Flaws, Broken Access Control, IDOR, AuthN/AuthZ, injeções e exposição de dados sensíveis.</li>
+    <li><strong>Método:</strong> mapeamento de superfície de ataque em APIs/web, exploração responsável, reporte claro e acompanhamento até correção.</li>
+    <li><strong>Engenharia segura:</strong> OWASP Top 10 na prática, code review com viés de segurança, hardening de endpoints e threat modeling em features críticas.</li>
   </ul>
 
   <h2>
@@ -836,9 +1113,10 @@
       </a>
     </div>
     <ul>
-      <li>IDE com IA integrada (inspirada em Cursor/VS Code): orquestração própria de LLMs, agent loop com ferramentas nativas.</li>
-      <li>Modos Agent (autônomo), Ask (read-only) e Plan; sistema de Rules e Hooks; logs NDJSON com rastreio por request.</li>
-      <li>Roteador multi-provider (GPT, Claude, Gemini, DeepSeek, Llama) para escolher modelo por etapa e controlar custo.</li>
+      <li>IDE com agente de IA (inspirada em Cursor/VS Code): orquestração própria de LLMs, agent loop e ferramentas nativas de código.</li>
+      <li>Modos Agent / Ask / Plan; Rules e Hooks; logs NDJSON com rastreio por request para debug e auditoria.</li>
+      <li>Roteador multi-provider (GPT, Claude, Gemini, DeepSeek, Llama) por etapa — qualidade vs. custo sob controle.</li>
+      <li><strong>Diferencial:</strong> produto full-stack próprio (Go + Vue), do runtime do agente à UI — não só wrapper de API.</li>
     </ul>
     <div class="stack">
       <span class="stack-label">Stack</span>
@@ -854,9 +1132,9 @@
       </a>
     </div>
     <ul>
-      <li>CLI em Go com tool calling (bash, arquivos, diretórios); UI web opcional via <code>-serve</code>.</li>
-      <li>Suporte a modelos locais (Ollama, LM Studio, llama.cpp) e cloud; roteador híbrido local/cloud por complexidade, custo e privacidade.</li>
-      <li>Modo speculative (1+1): dispara modelo local e cloud em paralelo e escolhe a melhor resposta.</li>
+      <li>CLI em Go com tool calling (bash, arquivos, diretórios) e UI web opcional via <code>-serve</code>.</li>
+      <li>Roteador híbrido local/cloud (Ollama, LM Studio, llama.cpp + providers cloud) por complexidade, custo e privacidade.</li>
+      <li>Modo speculative (1+1): dispara local e cloud em paralelo e escolhe a melhor resposta — latência e qualidade no mesmo fluxo.</li>
     </ul>
     <div class="stack">
       <span class="stack-label">Stack</span>
@@ -872,8 +1150,9 @@
       </a>
     </div>
     <ul>
-      <li>Produto próprio que transforma WhatsApp em canal de atendimento automatizado para pequenos negócios (vendas e suporte).</li>
-      <li>Arquitetura em camadas, billing por créditos (Stripe), integração Evolution API + OpenAI com function calling e mitigação de prompt injection.</li>
+      <li>SaaS próprio: WhatsApp como canal de atendimento automatizado para PMEs (vendas e suporte), do onboarding ao billing.</li>
+      <li>Arquitetura em camadas, créditos via Stripe, Evolution API + OpenAI com function calling e mitigação de prompt injection.</li>
+      <li><strong>Produto completo:</strong> backend, frontend, pagamentos e agente — desenhado para rodar em produção, não só demo.</li>
     </ul>
     <div class="stack">
       <span class="stack-label">Stack</span>
@@ -882,7 +1161,7 @@
   </div>
   <div class="job">
     <div class="sub">
-      Freelance — Alexandre Riuti Wada · 99Freelas
+      Freelance — 99Freelas
       <a href="https://www.99freelas.com.br/user/alexandre-riuti-wada" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         Ver perfil
@@ -890,7 +1169,6 @@
     </div>
     <ul>
       <li>Perfil ativo desde 2014 (paralelo à carreira CLT): <strong>82 projetos concluídos</strong>, nota <strong>4,83</strong> (85 avaliações), ranking ~128 na plataforma.</li>
-      <li>Projetos end-to-end: sistemas web, APIs, integrações, WordPress, automações e manutenção — do desenho ao deploy em Linux.</li>
     </ul>
   </div>
 
@@ -909,7 +1187,7 @@
     Competências Técnicas
   </h2>
   <div class="skills-grid">
-    <div><span class="cat">Linguagens</span> <span class="vals">Go, PHP, Python, Node.js, JavaScript/TypeScript, Elixir, Ruby, Shell/Bash</span></div>
+    <div><span class="cat">Linguagens</span> <span class="vals">Go, PHP, Python, Node.js, JavaScript/TypeScript, Shell/Bash · Elixir e Ruby (produção)</span></div>
     <div><span class="cat">Backend</span> <span class="vals">Laravel, Fastify, APIs REST, microsserviços, filas (AWS SQS), Clean Architecture, SOLID, Design Patterns</span></div>
     <div><span class="cat">Frontend</span> <span class="vals">Vue.js, Nuxt.js (SSR), Vite, Angular, React (atuação pontual), Core Web Vitals</span></div>
     <div><span class="cat">Dados</span> <span class="vals">MySQL, PostgreSQL, MongoDB, Redis, Elasticsearch</span></div>
@@ -918,7 +1196,7 @@
     <div><span class="cat">Segurança</span> <span class="vals">OWASP, AppSec, AuthN/AuthZ, IDOR / Broken Access Control, pentest web, bug bounty, threat modeling</span></div>
     <div><span class="cat">IA</span> <span class="vals">LLMs, AI Agents, MCP, function calling, prompt engineering, mitigação de prompt injection, roteamento multi-provider, automação</span></div>
     <div><span class="cat">Práticas</span> <span class="vals">System design, code review, mentoria, Scrum, SEO técnico, performance, automação/ETL</span></div>
-    <div><span class="cat">Domínios</span> <span class="vals">E-commerce, EdTech, pagamentos (Stripe, Vindi, Mundipagg), ERP, franquias</span></div>
+    <div><span class="cat">Domínios</span> <span class="vals">E-commerce / marketplace, EdTech, pagamentos (Stripe, Vindi, Mundipagg), ERP, franquias, campanhas promocionais, AppSec</span></div>
   </div>
 
   <h2>
@@ -933,5 +1211,16 @@
   </div>
 
 </div>
+<script>
+  (function () {
+    var birth = new Date(1993, 4, 2); // 02/05/1993
+    var now = new Date();
+    var age = now.getFullYear() - birth.getFullYear();
+    var m = now.getMonth() - birth.getMonth();
+    if (m < 0 || (m === 0 && now.getDate() < birth.getDate())) age--;
+    var el = document.getElementById("age");
+    if (el) el.textContent = age + " anos";
+  })();
+</script>
 </body>
 </html>
